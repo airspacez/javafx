@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
+   <children>
+      <Button fx:id="buttonUp" layoutX="357.0" layoutY="240.0" mnemonicParsing="false" onAction="#up" text="Вверх">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonDown" layoutX="365.0" layoutY="349.0" mnemonicParsing="false" onAction="#down" text="Вниз">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttorRight" layoutX="447.0" layoutY="294.0" mnemonicParsing="false" onAction="#right" text="Направо">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonLeft" layoutX="251.0" layoutY="294.0" mnemonicParsing="false" onAction="#left" text="Налево">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="37.0" layoutY="29.0" text="Карта:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textMapXInGame" layoutX="104.0" layoutY="29.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="155.0" layoutY="29.0" text="на">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textMapYInGame" layoutX="181.0" layoutY="29.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="507.0" layoutY="29.0" text="ХП персонажа:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="507.0" layoutY="59.0" text="ДПС персонажа:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="507.0" layoutY="89.0" text="Скорость передвижения:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="136.0" layoutY="433.0" prefHeight="155.0" prefWidth="609.0" />
+      <Label layoutX="228.0" layoutY="150.0" text="Артефакт находится по координатам:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="313.0" layoutY="180.0" text="x:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="415.0" layoutY="180.0" text="y:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textartifactXInGame" layoutX="337.0" layoutY="180.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textartifactYInGame" layoutX="440.0" layoutY="180.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textHPInGame" layoutX="655.0" layoutY="29.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textDPSInGame" layoutX="669.0" layoutY="59.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textMovespeedInGame" layoutX="748.0" layoutY="89.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonBack" layoutX="24.0" layoutY="544.0" mnemonicParsing="false" onAction="#back" text="Выход">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
