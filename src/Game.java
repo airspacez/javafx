@@ -13,10 +13,10 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("SceneStartMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Scenes/SceneStartMenu.fxml"));
         Scene scene1 = new Scene(root);
         stage.setTitle("В поисках артефактов");
-        stage.getIcons().add(new Image("artifact.png"));
+        stage.getIcons().add(new Image("Resources/artifact.png"));
         stage.setScene(scene1);
         stage.show();
     }

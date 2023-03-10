@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <Label layoutX="205.0" layoutY="31.0" text="Текущие характеристики персонажа:">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="65.0" text="Имя:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textCharacterName" layoutX="105.0" layoutY="65.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="94.0" text="Кол-во ХП:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textCharacterHP" layoutX="162.0" layoutY="94.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="124.0" text="Кол-во дамага:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="154.0" text="Скорость передвижения:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textCharacterDamage" layoutX="196.0" layoutY="124.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textCharacterMovespeed" layoutX="292.0" layoutY="154.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldCharacterName" layoutX="106.0" layoutY="238.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="fieldCharacterHP" layoutX="106.0" layoutY="314.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="106.0" layoutY="205.0" text="Введите имя:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="106.0" layoutY="280.0" text="Введите кол-во ХП:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonSaveCharacter" layoutX="659.0" layoutY="527.0" mnemonicParsing="false" onAction="#saveCharacter" text="Сохранить">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonBackMap" layoutX="51.0" layoutY="527.0" mnemonicParsing="false" onAction="#back" text="Назад">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <TextField fx:id="fieldCharacterDamage" layoutX="426.0" layoutY="238.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="fieldCharacterMovespeed" layoutX="426.0" layoutY="314.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="426.0" layoutY="205.0" text="Введите кол-во дамага:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="426.0" layoutY="280.0" text="Введите скорость передвижения:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

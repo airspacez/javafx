@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <TextField fx:id="fieldMapX" layoutX="276.0" layoutY="188.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="fieldMapY" layoutX="276.0" layoutY="264.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="276.0" layoutY="155.0" text="Введите размер по Х">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="276.0" layoutY="230.0" text="Введите размер по Y">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="21.0" text="Текущие размеры карты:">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="75.0" text="Х:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textMapX" layoutX="83.0" layoutY="75.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="102.0" text="Y:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="textMapY" layoutX="83.0" layoutY="102.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonSaveMap" layoutX="649.0" layoutY="517.0" mnemonicParsing="false" onAction="#saveMap" text="Сохранить">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonBackMap" layoutX="41.0" layoutY="517.0" mnemonicParsing="false" onAction="#back" text="Назад">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
