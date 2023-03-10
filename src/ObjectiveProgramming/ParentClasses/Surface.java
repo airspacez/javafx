@@ -1,5 +1,5 @@
 package ObjectiveProgramming.ParentClasses;
-public abstract class Surface {
+public class Surface {
 
     private int x;
     private int y;

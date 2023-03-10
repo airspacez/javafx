@@ -63,7 +63,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextArea layoutX="159.0" layoutY="433.0" prefHeight="155.0" prefWidth="609.0" />
+      <TextArea fx:id="console" layoutX="159.0" layoutY="433.0" prefHeight="155.0" prefWidth="609.0" />
       <Label layoutX="228.0" layoutY="150.0" text="Артефакт находится по координатам:">
          <font>
             <Font size="20.0" />

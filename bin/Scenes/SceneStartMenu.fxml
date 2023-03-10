@@ -29,7 +29,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label layoutX="181.0" layoutY="121.0" text="В поисках артефактов" textAlignment="CENTER">
+      <Label layoutX="158.0" layoutY="121.0" text="В поисках артефактов" textAlignment="CENTER">
          <font>
             <Font size="50.0" />
          </font>
