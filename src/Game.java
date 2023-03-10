@@ -17,13 +17,12 @@ public class Game extends Application {
     static Surface surface;
     static Human<String> human;
     static Artifact artifact;
-    
 
     @Override
     public void start(Stage stage) throws IOException {
         surface = new Surface(10, 10);
         human = new Human<String>("1", "Leo", 100, 100, 1);
-        artifact = new Artifact("Mirror", "rare", (int) (Math.random() * surface.getX()),
+        artifact = new Artifact("Mirror", "rare", 20, 30, (int) (Math.random() * surface.getX()),
                 (int) (Math.random() * surface.getY()));
         Parent root = FXMLLoader.load(getClass().getResource("Scenes/SceneStartMenu.fxml"));
         Scene scene1 = new Scene(root);

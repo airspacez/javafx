@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import ObjectiveProgramming.ChildClasses.Artifact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,6 +53,12 @@ public class Controller {
 
     @FXML
     private TextField fieldCharacterHP;
+
+    @FXML
+    private Label textArtifactDamage;
+
+    @FXML
+    private Label textArtifactHP;
 
     @FXML
     private TextField fieldCharacterMovespeed;
@@ -138,7 +143,6 @@ public class Controller {
 
         console.appendText("Начальные координаты игрока: x: " + Game.human.getX() + " y: "
                 + Game.human.getY() + "\n");
-        System.out.println("second");
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -263,12 +267,16 @@ public class Controller {
     void findArtifact() {
         if (Game.human.getX() == Game.artifact.getX() && Game.human.getY() == Game.artifact.getY()) {
             console.appendText("Найден артефакт!");
-            Game.human.pickUpArtifact();
+            Game.human.pickUpArtifact(Game.artifact);
             textHPInGame.setText(String.valueOf(Game.human.getHealth()));
             textDPSInGame.setText(String.valueOf(Game.human.getDamage()));
             Game.artifact = null;
-            Game.artifact = new Artifact("test", "rare", (int) (Math.random() * Game.surface.getX()),
+            Game.artifact = new Artifact("test", "rare", 100, 100, (int) (Math.random() * Game.surface.getX()),
                     (int) (Math.random() * Game.surface.getY()));
+            textArtifactName.setText(Game.artifact.getName());
+            textArtifactRarity.setText(Game.artifact.getRarity());
+            textArtifactHP.setText(String.valueOf(Game.artifact.getHealth()));
+            textArtifactDamage.setText(String.valueOf(Game.artifact.getDamage()));
             textartifactXInGame.setText(String.valueOf(Game.artifact.getX()));
             textartifactYInGame.setText(String.valueOf(Game.artifact.getY()));
         }

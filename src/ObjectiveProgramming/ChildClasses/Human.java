@@ -62,9 +62,9 @@ public class Human<T> extends Unit<T> implements IMove, IPickUpArtifacts, IDoubl
     }
 
     @Override
-    public void pickUpArtifact() {
-        health += 10;
-        damage += 10;
+    public void pickUpArtifact(Artifact artifact) {
+        health += artifact.getHealth();
+        damage += artifact.getDamage();
     }
 
 }
