@@ -1,4 +1,8 @@
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.Scanner;
 
 import ObjectiveProgramming.ChildClasses.Artifact;
 import ObjectiveProgramming.ChildClasses.Human;
@@ -15,15 +19,11 @@ public class Game extends Application {
     Scene scene;
     Parent root;
     static Surface surface;
-    static Human<String> human;
+    static Human<Integer> human;
     static Artifact artifact;
 
     @Override
     public void start(Stage stage) throws IOException {
-        surface = new Surface(10, 10);
-        human = new Human<String>("1", "Leo", 100, 100, 1);
-        artifact = new Artifact("Mirror", "rare", 20, 30, (int) (Math.random() * surface.getX()),
-                (int) (Math.random() * surface.getY()));
         Parent root = FXMLLoader.load(getClass().getResource("Scenes/SceneStartMenu.fxml"));
         Scene scene1 = new Scene(root);
         stage.setTitle("В поисках артефактов");
@@ -33,6 +33,48 @@ public class Game extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        surface = new Surface(10, 10);
+        human = new Human<Integer>(1, "Leo", 100, 100, 1);
+        artifact = new Artifact("Mirror", "rare", 20, 20, (int) (Math.random() * surface.getX()),
+                (int) (Math.random() * surface.getY()));
+                try (var sc = new Scanner(System.in)) {
+                    try (DatagramSocket socket = new DatagramSocket(7777)) {
+                        
+                        Thread launchThread = new Thread(() -> {
+                            launch(args);
+                        });
+                        launchThread.start();
+        
+                        Thread socketThread = new Thread(() -> {
+                            try {
+                                String previousMsg = "";
+                                while (true) {
+                                    String getXY = "x: " + String.valueOf(human.getX()) + " y: " +  String.valueOf(human.getY());
+                                    if (!getXY.equals(previousMsg)) {
+                                        var msg = "Координаты " + human.getName() + " изменены. Теперь: " + getXY + "";
+                                        System.out.println(msg);
+                                        byte[] b = msg.getBytes();
+                                        DatagramPacket dp = new DatagramPacket(b, b.length, InetAddress.getByName("localhost"),
+                                                8888);
+                                        socket.send(dp);
+                                        previousMsg = getXY;
+                                    }
+                                    Thread.sleep(300);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        socketThread.start();
+                        launchThread.join();
+                        socketThread.join();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
     }
-}

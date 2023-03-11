@@ -12,10 +12,10 @@
         },
         {
             "type": "java",
-            "name": "App",
+            "name": "Game",
             "request": "launch",
             "mainClass": "Game",
-            "projectName": "javafx_d839a109",
+            "projectName": "javafx_ca72d673",
             "vmArgs": "--module-path \"C:/Java/javafx-sdk-19.0.2.1/lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]

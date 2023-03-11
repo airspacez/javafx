@@ -63,22 +63,42 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="138.0" text="ХП:">
+      <Label layoutX="51.0" layoutY="138.0" text="Дает ХП:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="168.0" text="Дамаг:">
+      <Label layoutX="51.0" layoutY="168.0" text="Дает дамага:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="textArtifactHP" layoutX="92.0" layoutY="138.0" text="Label">
+      <Label fx:id="textArtifactHP" layoutX="142.0" layoutY="138.0" text="Label">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="textArtifactDamage" layoutX="119.0" layoutY="168.0" text="Label">
+      <Label fx:id="textArtifactDamage" layoutX="176.0" layoutY="168.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldArtifactHP" layoutX="286.0" layoutY="348.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="fieldArtifactDamage" layoutX="286.0" layoutY="422.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="286.0" layoutY="318.0" text="Введите ХП:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="286.0" layoutY="392.0" text="Введите дамаг:">
          <font>
             <Font size="20.0" />
          </font>

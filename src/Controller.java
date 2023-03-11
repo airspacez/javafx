@@ -55,10 +55,10 @@ public class Controller {
     private TextField fieldCharacterHP;
 
     @FXML
-    private Label textArtifactDamage;
+    private Label textArtifactDamage = new Label();
 
     @FXML
-    private Label textArtifactHP;
+    private Label textArtifactHP = new Label();
 
     @FXML
     private TextField fieldCharacterMovespeed;
@@ -86,6 +86,12 @@ public class Controller {
 
     @FXML
     private TextField fieldArtifactRarity;
+
+    @FXML
+    private TextField fieldArtifactHP;
+
+    @FXML
+    private TextField fieldArtifactDamage;
 
     @FXML
     private Label textArtifactName = new Label();
@@ -130,16 +136,35 @@ public class Controller {
     private TextArea console = new TextArea();
 
     @FXML
-    public void initialize() {
+    private TextField fieldMapX;
+
+    @FXML
+    private TextField fieldMapY;
+
+    @FXML
+    public void initialize() { //render
         textDPSInGame.setText(String.valueOf(Game.human.getDamage()));
         textHPInGame.setText(String.valueOf(Game.human.getHealth()));
         textMovespeedInGame.setText(String.valueOf(Game.human.getSpeed()));
+
+        textArtifactHP.setText(String.valueOf(Game.artifact.getHealth()));
+        textArtifactName.setText(Game.artifact.getName());
+        textArtifactRarity.setText(Game.artifact.getRarity());
+        textArtifactDamage.setText(String.valueOf(Game.artifact.getDamage()));
 
         textartifactXInGame.setText(String.valueOf(Game.artifact.getX()));
         textartifactYInGame.setText(String.valueOf(Game.artifact.getY()));
 
         textMapXInGame.setText(String.valueOf(Game.surface.getX()));
         textMapYInGame.setText(String.valueOf(Game.surface.getY()));
+
+        textMapX.setText(String.valueOf(Game.surface.getX()));
+        textMapY.setText(String.valueOf(Game.surface.getY()));
+
+        textCharacterName.setText(String.valueOf(Game.human.getName()));
+        textCharacterHP.setText(String.valueOf(Game.human.getHealth()));
+        textCharacterDamage.setText(String.valueOf(Game.human.getDamage()));
+        textCharacterMovespeed.setText(String.valueOf(Game.human.getSpeed()));
 
         console.appendText("Начальные координаты игрока: x: " + Game.human.getX() + " y: "
                 + Game.human.getY() + "\n");
@@ -206,8 +231,19 @@ public class Controller {
     }
 
     @FXML
-    void saveMap(ActionEvent event) {
+    void saveMap(ActionEvent event) throws IOException {
+        String mapX = fieldMapX.getText();
+        String mapY = fieldMapY.getText();
+        
+        int x = Integer.parseInt(mapX);
+        int y = Integer.parseInt(mapY);
 
+        textMapX.setText(mapX);
+        textMapY.setText(mapY);
+
+        Game.surface.setX(x);
+        Game.surface.setY(y);
+        back(event);
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -215,8 +251,26 @@ public class Controller {
     ////////////////////////////////////////////////////////////////////////////////
 
     @FXML
-    void saveCharacter(ActionEvent event) {
+    void saveCharacter(ActionEvent event) throws IOException {
+        String nameCharacter = fieldCharacterName.getText();
+        String healthCharacter = fieldCharacterHP.getText();
+        String damageCharacter = fieldCharacterDamage.getText();
+        String speedCharacter = fieldCharacterMovespeed.getText();
+        
+        int health = Integer.parseInt(healthCharacter);
+        int damage = Integer.parseInt(damageCharacter);
+        int speed = Integer.parseInt(speedCharacter);
 
+        textCharacterName.setText(nameCharacter);
+        textCharacterHP.setText(healthCharacter);
+        textCharacterDamage.setText(damageCharacter);
+        textCharacterMovespeed.setText(speedCharacter);
+
+        Game.human.setName(nameCharacter);
+        Game.human.setHealth(health);
+        Game.human.setDamage(damage);
+        Game.human.setSpeed(speed);
+        back(event);
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -224,8 +278,25 @@ public class Controller {
     ////////////////////////////////////////////////////////////////////////////////
 
     @FXML
-    void saveArtifact(ActionEvent event) {
+    void saveArtifact(ActionEvent event) throws IOException {
+        String artifactName = fieldArtifactName.getText();
+        String artifactRarity = fieldArtifactRarity.getText();
+        String artifactHP = fieldArtifactHP.getText();
+        String artifactDamage = fieldArtifactDamage.getText();
 
+        int hp = Integer.parseInt(artifactHP);
+        int damage = Integer.parseInt(artifactDamage);
+
+        textArtifactName.setText(artifactName);
+        textArtifactRarity.setText(artifactRarity);
+        textArtifactHP.setText(artifactHP);
+        textArtifactDamage.setText(artifactDamage);
+
+        Game.artifact.setName(artifactName);
+        Game.artifact.setRarity(artifactRarity);
+        Game.artifact.setHealth(hp);
+        Game.artifact.setDamage(damage);
+        back(event);
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -235,7 +306,7 @@ public class Controller {
     @FXML
     void down(ActionEvent event) {
         Game.human.setY(Game.human.getY() - Game.human.getSpeed());
-        console.appendText(
+        console.setText(
                 "Вниз. Текущие координаты игрока x: " + Game.human.getX() + " y: " + Game.human.getY() + "\n");
         findArtifact();
     }
@@ -243,7 +314,7 @@ public class Controller {
     @FXML
     void left(ActionEvent event) {
         Game.human.setX(Game.human.getX() - Game.human.getSpeed());
-        console.appendText(
+        console.setText(
                 "Налево. Текущие координаты игрока x: " + Game.human.getX() + " y: " + Game.human.getY() + "\n");
         findArtifact();
     }
@@ -251,7 +322,7 @@ public class Controller {
     @FXML
     void right(ActionEvent event) {
         Game.human.setX(Game.human.getX() + Game.human.getSpeed());
-        console.appendText(
+        console.setText(
                 "Направо. Текущие координаты игрока x: " + Game.human.getX() + " y: " + Game.human.getY() + "\n");
         findArtifact();
     }
@@ -259,7 +330,7 @@ public class Controller {
     @FXML
     void up(ActionEvent event) {
         Game.human.setY(Game.human.getY() + Game.human.getSpeed());
-        console.appendText(
+        console.setText(
                 "Вверх. Текущие координаты игрока x: " + Game.human.getX() + " y: " + Game.human.getY() + "\n");
         findArtifact();
     }
@@ -270,13 +341,13 @@ public class Controller {
             Game.human.pickUpArtifact(Game.artifact);
             textHPInGame.setText(String.valueOf(Game.human.getHealth()));
             textDPSInGame.setText(String.valueOf(Game.human.getDamage()));
+            textArtifactHP.setText(String.valueOf(Game.artifact.getHealth()));
+            textArtifactName.setText(Game.artifact.getName());
+            textArtifactRarity.setText(Game.artifact.getRarity());
+            textArtifactDamage.setText(String.valueOf(Game.artifact.getDamage()));
             Game.artifact = null;
             Game.artifact = new Artifact("test", "rare", 100, 100, (int) (Math.random() * Game.surface.getX()),
                     (int) (Math.random() * Game.surface.getY()));
-            textArtifactName.setText(Game.artifact.getName());
-            textArtifactRarity.setText(Game.artifact.getRarity());
-            textArtifactHP.setText(String.valueOf(Game.artifact.getHealth()));
-            textArtifactDamage.setText(String.valueOf(Game.artifact.getDamage()));
             textartifactXInGame.setText(String.valueOf(Game.artifact.getX()));
             textartifactYInGame.setText(String.valueOf(Game.artifact.getY()));
         }
