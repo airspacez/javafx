@@ -1,8 +1,4 @@
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.util.Scanner;
-
 import ObjectiveProgramming.ChildClasses.Artifact;
 import ObjectiveProgramming.ChildClasses.Human;
 import ObjectiveProgramming.ParentClasses.Surface;
@@ -36,42 +32,8 @@ public class Game extends Application {
         human = new Human<Integer>(1, "Leo", 100, 100, 1);
         artifact = new Artifact("Mirror", "rare", 20, 20, (int) (Math.random() * surface.getX()),
                 (int) (Math.random() * surface.getY()));
-        Thread launchThread = new Thread(() -> {
-            launch(args);
-        });
-        launchThread.start();
-        try (var sc = new Scanner(System.in)) {
-            try (Socket socket = new Socket("localhost", 8888)) {
-                Thread socketThread = new Thread(() -> {
-                    try {
-                        String previousMsg = "";
-                        while (true) {
-                            String getXY = "x: " + String.valueOf(human.getX()) + " y: " + String.valueOf(human.getY());
-                            if (!getXY.equals(previousMsg)) {
-                                var msg = "Координаты " + human.getName() + " изменены. Теперь: " + getXY + "";
-                                System.out.println(msg);
+        Controller.Client();
+        launch(args);
 
-                                OutputStream outputStream = socket.getOutputStream();
-                                outputStream.write(msg.getBytes());
-
-                                previousMsg = getXY;
-                            }
-                            Thread.sleep(300);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                });
-                socketThread.start();
-                launchThread.join();
-                socketThread.join();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

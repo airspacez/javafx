@@ -1,4 +1,9 @@
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import ObjectiveProgramming.ChildClasses.Artifact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -142,7 +147,7 @@ public class Controller {
     private TextField fieldMapY;
 
     @FXML
-    public void initialize() { //render
+    public void initialize() { // render
         textDPSInGame.setText(String.valueOf(Game.human.getDamage()));
         textHPInGame.setText(String.valueOf(Game.human.getHealth()));
         textMovespeedInGame.setText(String.valueOf(Game.human.getSpeed()));
@@ -169,6 +174,37 @@ public class Controller {
         console.appendText("Начальные координаты игрока: x: " + Game.human.getX() + " y: "
                 + Game.human.getY() + "\n");
     }
+
+    static public void Client() {
+        Runnable runnable = () -> {
+            Socket socket;
+            try {
+                socket = new Socket("localhost", 8888);
+                String previousMsg = "";
+                while (true) {
+                    String getXY = "x: " + String.valueOf(Game.human.getX()) + " y: "
+                            + String.valueOf(Game.human.getY());
+                    if (!getXY.equals(previousMsg)) {
+                        var msg = "Координаты " + Game.human.getName() + " изменены. Теперь: " + getXY + "";
+                        System.out.println(msg);
+
+                        OutputStream outputStream = socket.getOutputStream();
+                        outputStream.write(msg.getBytes());
+
+                        previousMsg = getXY;
+                    }
+                    Thread.sleep(300); 
+                }}
+            catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+        ExecutorService thread1 = Executors.newSingleThreadExecutor();
+        thread1.execute(runnable);
+    }
+    
 
     //////////////////////////////////////////////////////////////////////////
     ////////////////////////////// SceneStartMenu//////////////////////////////
@@ -234,7 +270,7 @@ public class Controller {
     void saveMap(ActionEvent event) throws IOException {
         String mapX = fieldMapX.getText();
         String mapY = fieldMapY.getText();
-        
+
         int x = Integer.parseInt(mapX);
         int y = Integer.parseInt(mapY);
 
@@ -256,7 +292,7 @@ public class Controller {
         String healthCharacter = fieldCharacterHP.getText();
         String damageCharacter = fieldCharacterDamage.getText();
         String speedCharacter = fieldCharacterMovespeed.getText();
-        
+
         int health = Integer.parseInt(healthCharacter);
         int damage = Integer.parseInt(damageCharacter);
         int speed = Integer.parseInt(speedCharacter);
@@ -302,7 +338,7 @@ public class Controller {
     ////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////// SceneGame////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-    
+
     @FXML
     void down(ActionEvent event) {
         Game.human.setY(Game.human.getY() - Game.human.getSpeed());
