@@ -1,7 +1,6 @@
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.Scanner;
 
 import ObjectiveProgramming.ChildClasses.Artifact;
@@ -37,44 +36,42 @@ public class Game extends Application {
         human = new Human<Integer>(1, "Leo", 100, 100, 1);
         artifact = new Artifact("Mirror", "rare", 20, 20, (int) (Math.random() * surface.getX()),
                 (int) (Math.random() * surface.getY()));
-                try (var sc = new Scanner(System.in)) {
-                    try (DatagramSocket socket = new DatagramSocket(7777)) {
-                        
-                        Thread launchThread = new Thread(() -> {
-                            launch(args);
-                        });
-                        launchThread.start();
-        
-                        Thread socketThread = new Thread(() -> {
-                            try {
-                                String previousMsg = "";
-                                while (true) {
-                                    String getXY = "x: " + String.valueOf(human.getX()) + " y: " +  String.valueOf(human.getY());
-                                    if (!getXY.equals(previousMsg)) {
-                                        var msg = "Координаты " + human.getName() + " изменены. Теперь: " + getXY + "";
-                                        System.out.println(msg);
-                                        byte[] b = msg.getBytes();
-                                        DatagramPacket dp = new DatagramPacket(b, b.length, InetAddress.getByName("localhost"),
-                                                8888);
-                                        socket.send(dp);
-                                        previousMsg = getXY;
-                                    }
-                                    Thread.sleep(300);
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+        Thread launchThread = new Thread(() -> {
+            launch(args);
+        });
+        launchThread.start();
+        try (var sc = new Scanner(System.in)) {
+            try (Socket socket = new Socket("localhost", 8888)) {
+                Thread socketThread = new Thread(() -> {
+                    try {
+                        String previousMsg = "";
+                        while (true) {
+                            String getXY = "x: " + String.valueOf(human.getX()) + " y: " + String.valueOf(human.getY());
+                            if (!getXY.equals(previousMsg)) {
+                                var msg = "Координаты " + human.getName() + " изменены. Теперь: " + getXY + "";
+                                System.out.println(msg);
+
+                                OutputStream outputStream = socket.getOutputStream();
+                                outputStream.write(msg.getBytes());
+
+                                previousMsg = getXY;
                             }
-                        });
-                        socketThread.start();
-                        launchThread.join();
-                        socketThread.join();
+                            Thread.sleep(300);
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                });
+                socketThread.start();
+                launchThread.join();
+                socketThread.join();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+}
